@@ -2,12 +2,9 @@ import { Request, Response } from "express";
 
 import { requestOtp } from "../services/auth.service";
 
-const isValidPhoneNumber = (phoneNumber: string) => {
-  return /^\+\d{10,15}$/.test(phoneNumber);
-};
-
 export const requestOtpHandler = (req: Request, res: Response) => {
   const phoneNumber = typeof req.body?.phoneNumber === "string" ? req.body.phoneNumber.trim() : "";
+  const phoneRegex = /^\+?[1-9]\d{7,14}$/;
 
   if (!phoneNumber) {
     return res.status(400).json({
@@ -16,10 +13,10 @@ export const requestOtpHandler = (req: Request, res: Response) => {
     });
   }
 
-  if (!isValidPhoneNumber(phoneNumber)) {
+  if (!phoneRegex.test(phoneNumber)) {
     return res.status(400).json({
       success: false,
-      message: "phoneNumber must be in E.164 format"
+      message: "phoneNumber format is invalid"
     });
   }
 
