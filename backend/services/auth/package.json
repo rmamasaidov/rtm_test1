@@ -9,10 +9,12 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "express": "latest"
+    "express": "latest",
+    "jsonwebtoken": "latest"
   },
   "devDependencies": {
     "@types/express": "latest",
+    "@types/jsonwebtoken": "latest",
     "@types/node": "latest",
     "typescript": "latest"
   }
